@@ -25,6 +25,7 @@ import { isWinner, isDraw } from '../../utils/game';
 const checkWinner = (board, player) => (dispatch) => {
   // the logic to check if a player has won or the game ended in a draw are in 
   // the utils/game.js file.
+  let hasWinner = true;
 
   if (isWinner(board, player)) {
     dispatch(winner(player));
@@ -32,7 +33,11 @@ const checkWinner = (board, player) => (dispatch) => {
   } else if (isDraw(board)) {
     dispatch(winner(0));
     dispatch(gameover());
+  } else {
+    hasWinner = false;
   }
+
+  return hasWinner;
 };
 
 /**
